@@ -19,6 +19,9 @@ public class Game {
 	//constructor para los mock
 	
 	public Game() {
+		player= new Player();
+		board = new Board();
+		visuals = new BoardVisuals();
 		this.mainFlux();
 	}
 	
@@ -26,6 +29,7 @@ public class Game {
 		this.setMockInOut(io);
 		this.setMockBoard(b);
 		this.setMockInOut(io);
+		this.mainFlux();
 	}
 	
 	//setter del mock object
@@ -78,10 +82,6 @@ public class Game {
 	
 
 	private void mainFlux() {
-		
-		player= new Player();
-		board = new Board();
-		visuals = new BoardVisuals();
 		boolean itsPossibleToPlay=true;
 		Scanner reader = new Scanner(System.in);
 		boolean exists;
@@ -101,12 +101,12 @@ public class Game {
 
 		do {
 			System.out.println("Introduce la casilla a destapar. [En formato coordenadas] -> x,y: ");
-			pos = reader.nextLine();  //HAY QUE COMPROVAR QUE EL VALOR SEA FACTIBLE. CON VALOR ME REFIERO AL INPUT ENTERO O MAS ADELANTE AL PRIMER Y TERCER CHAR
+			//pos = reader.nextLine();  //HAY QUE COMPROVAR QUE EL VALOR SEA FACTIBLE. CON VALOR ME REFIERO AL INPUT ENTERO O MAS ADELANTE AL PRIMER Y TERCER CHAR
 			pos = inout.getKeyboardInput();
 			if (checkInput(pos, 1)) {
 				System.out.println("Que desea hacer con esta casilla? [Formato]-> F/D: ");
-				action = reader.nextLine(); //APLICAR FUNCION COMPROBADORA Y QUE EXTRAIGA EL INT
-				
+				//action = reader.nextLine(); //APLICAR FUNCION COMPROBADORA Y QUE EXTRAIGA EL INT
+				action = inout.getKeyboardInput();
 				if (checkInput(action, 2)) {
 					if(action.equals("f")) {
 						exists=board.setFlag(inputX-1, inputY-1);
