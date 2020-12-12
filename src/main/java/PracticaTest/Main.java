@@ -3,30 +3,32 @@ package PracticaTest;
 public class Main {
 
 	public static void main(String[] args) {
-		
-		//ejecución estandar
-		Game juego = new Game();
-		
-		//ejecución Mock
-		
-		
-		boolean[][] testArray1 =	{{true ,  true ,  true ,  false ,  true ,  true ,  true	}, 
-									{true ,  true ,  false  ,  false ,  false ,  true ,  true 	}, 
-									{true ,  false ,  false  ,  false ,  false  ,  false ,  true 	}, 
-									{false,  false ,  false ,  false ,  false ,  false  ,  false	}, 
-									{true ,  false ,  false ,  false ,  false ,  false ,  true	}, 
-									{true ,  true ,  false  ,  false ,  false ,  true ,  true	}, 
-									{true ,  true ,  true ,  false ,  true  ,  true  ,  true }};
-		
-		String[] inputs = {"D 1 2","F 3 3"};
+		//matriz de minas para mock testing
+		boolean[][] testArray1 = {  {false, false, false, false, false, false, false}, 
+									{false, false, false, false, false, false, false}, 
+									{false, false, false, false, false, false, false}, 
+									{false, false, false, false, false, false, false}, 
+									{false, false, false, false, false, false, false}, 
+									{false, false, false, false, false, false, false}, 
+									{false, false, false, false, false, false, false}};
+
+		String[] inputs = {"5,5","d"};
 		
 		Board b = new Board(testArray1);
 		Player p = new Player();
 		
+		//no hay control de errores en MockInuput, aseguraos de meter
+		//la cantidad de comandos en "String[] inputs" precisa para el 
+		//tablero que monteis
+		
 		MockInput in = new MockInput(inputs);
 		
 		
-		juego = new Game(p, b, in);
+		//EJECUCIï¿½N ESTANDAR
+		//Game juego = new Game();
+		
+		//EJECUCIï¿½N MOCK
+		Game juego = new Game(p, b, in);
 		
 	}
 	

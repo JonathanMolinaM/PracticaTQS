@@ -1,5 +1,4 @@
 package PracticaTest;
-import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Game {
@@ -10,10 +9,10 @@ public class Game {
 	 * state->[1 or 2 or 3] tells us if the square is cover(1) uncover(2) or with a flag(3). Default: cover.
 	 * adjacent ->[int] tells us how many adjacent mines there are. Default: 0.*/ //CAMBIAR EL COMENTARIO!
 
-	private static Player player;
-	private static Board board;
-	private static BoardVisuals visuals;
-	private static inputIO inout;
+	Player player;
+	Board board;
+	BoardVisuals visuals;
+	inputIO inout;
 	
 	static int inputX, inputY;
 	//constructor para los mock
@@ -22,13 +21,18 @@ public class Game {
 		player= new Player();
 		board = new Board();
 		visuals = new BoardVisuals();
+		inout = new InputUser();
+		
+		board.generateMineMap(40);
+		
 		this.mainFlux();
 	}
 	
 	public Game(Player p, Board b, inputIO io) {
 		this.setMockInOut(io);
 		this.setMockBoard(b);
-		this.setMockInOut(io);
+		this.setMockPlayer(p);
+		visuals = new BoardVisuals();
 		this.mainFlux();
 	}
 	
@@ -83,7 +87,6 @@ public class Game {
 
 	private void mainFlux() {
 		boolean itsPossibleToPlay=true;
-		Scanner reader = new Scanner(System.in);
 		boolean exists;
 		int uncovered=0; 
 		String pos;
@@ -96,7 +99,7 @@ public class Game {
 				+ "La tecla F pone una bandera i la tecla D destapa una casilla.\n");
 
 		System.out.println("A jugar...!\n");
-		board.generateMineMap(40);
+		
 		visuals.DrawBoard(board);
 
 		do {
@@ -122,7 +125,14 @@ public class Game {
 						} else {
 							player.increaseScore(uncovered);
 							itsPossibleToPlay = !board.isAllUncovered();//COMPROBAR SI YA ESTAN TODAS DESTAPADAS
-							System.out.println("Casilla/s destapada/s!\n");
+							System.out.println(uncovered + " casilla/s destapada/s!\n");
+							
+							if (!itsPossibleToPlay) {
+								System.out.println("Todas las casillas han sido destapadas!\n");
+								System.out.println("HAS GANADO!\n");
+							}
+								
+							
 						}
 
 					}
